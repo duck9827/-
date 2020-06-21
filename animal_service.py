@@ -24,11 +24,11 @@ def SearchFrame1():  # 서치라이브러리 함수? 오픈api로 받아올 함�
     DataList.clear()
 
     if req.status == 200:
-        BooksDoc = req.read().decode('utf-8')
-    if BooksDoc == None:
+        AnimalDoc = req.read().decode('utf-8')
+    if AnimalDoc == None:
         print("에러")
     else:
-        parseData = parseString(BooksDoc)
+        parseData = parseString(AnimalDoc)
         response = parseData.childNodes  # 이거 xml에 찰드노드
         item = response[0].childNodes
 
@@ -39,8 +39,8 @@ def SearchFrame1():  # 서치라이브러리 함수? 오픈api로 받아올 함�
                 # 아래는 주소 중 구나 동이 검색되었을때?
                 if subitems[3].firstChild.nodeValue == InputLabel.get():
                     pass
-                # elif subitems[3].firstChild.nodeValue == InputLabel.get():
-                # pass
+                elif subitems[3].firstChild.nodeValue == InputLabel.get():
+                    pass
                 else:
                     continue
 
@@ -63,6 +63,9 @@ def SearchFrame1():  # 서치라이브러리 함수? 오픈api로 받아올 함�
                                      subitems[5].firstChild.nodeValue, subitems[7].firstChild.nodeValue,
                                      subitems[37].firstChild.nodeValue, subitems[9].firstChild.nodeValue,
                                      subitems[31].firstChild.nodeValue, "-"))
+            else:
+                print("에러")
+
 
         for j in range(len(DataList)):
             RenderText.insert(INSERT, "<")
@@ -105,7 +108,7 @@ def SearchButtonAction():
         #pass
     #elif iSearchIndex == 2:  # 기타
         #pass
-    SearchFrame1()
+    #SearchFrame1()
 
     RenderText.configure(state='disabled')
 
@@ -194,7 +197,7 @@ RenderTextScrollbar.pack(side=RIGHT, fill=BOTH)
 
 RenderText.configure(state='disabled')
 
-
+SearchFrame1()
 #-------------여기까지 1페이지 내용----------------#
 frame2=Frame(window)
 notebook.add(frame2, text="유기동물 보호소 조회")
@@ -267,5 +270,18 @@ label3.place(x=17, y=15)
 #-------------여기까지 3페이지 내용----------------#
 
 SearchButtonAction()
-SearchFrame1()
+
 window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
